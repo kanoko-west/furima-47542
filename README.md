@@ -1,24 +1,47 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false |
+| last-name          | string | null: false |
+| first-name         | string | null: false |
+| last-name-kana     | string | null: false |
+| first-name-kana    | string | null: false |
+| birth-date         | date   | null: false |
 
-* Ruby version
+has_many :items
+has_many :orders
 
-* System dependencies
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| item-name          | string | null: false |
+| item-info          | text | null: false |
+| item-category      | integer | null: false |
+| item-sales-status  | integer | null: false |
+| item-shipping-fee-status| integer | null: false |
+| item-prefecture    | integer | null: false |
+| item-scheduled-delivery| integer | null: false |
+| item-price         | integer | null: false |
 
-* Database initialization
+belongs_to :user
+has_one :orders
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## orders テーブル
 
-* ...
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true, unique: true |
+ #購入画面はどこまでカラム作るのか？
+
+belongs_to :user
+belongs_to :item
