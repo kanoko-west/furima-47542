@@ -59,4 +59,5 @@ has_one :shipping_address
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
 
+
 belongs_to :order
