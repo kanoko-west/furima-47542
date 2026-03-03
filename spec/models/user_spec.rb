@@ -7,23 +7,23 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できる場合' do
-      it "nickname、last_name、first_name、last_name_kana、first_name_kana、birth_date、mail、passwordとpassword_confirmationが存在すれば登録できる" do
+      it 'nickname、last_name、first_name、last_name_kana、first_name_kana、birth_date、mail、passwordとpassword_confirmationが存在すれば登録できる' do
         expect(@user).to be_valid
       end
     end
 
     context '新規登録できない場合' do
-      it "nicknameが空では登録できない" do
+      it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
-      it "emailが空では登録できない" do
+      it 'emailが空では登録できない' do
         @user.email = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
-      it "passwordが空では登録できない" do
+      it 'passwordが空では登録できない' do
         @user.password = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
-      it 'passwordが5文字以下では登録できない' do 
+      it 'passwordが5文字以下では登録できない' do
         @user.password = '12345'
         @user.password_confirmation = '12345'
         @user.valid?
@@ -101,14 +101,14 @@ RSpec.describe User, type: :model do
         @user.password = '123456'
         @user.password_confirmation = '1234567'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")  
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
-            end
+      end
       it 'emailは@を含まないと登録できない' do
         @user.email = 'testmail'
         @user.valid?
