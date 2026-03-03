@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'rails_helper'
-
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
@@ -84,6 +82,21 @@ RSpec.describe Item, type: :model do
         @item.item_price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item price can't be blank")
+      end
+      it "item_priceが300円未満では登録できない" do
+        @item.item_price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item price must be greater than or equal to 300")
+      end
+      it "item_priceが9,999,999円を超えても登録できない" do
+        @item.item_price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item price must be less than or equal to 9999999")
+      end
+      it 'ユーザーが紐付いていなければ投稿できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
