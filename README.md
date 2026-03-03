@@ -32,6 +32,11 @@ has_many :orders
 | user               | references | null: false, foreign_key: true |
 
 belongs_to :user
+belongs_to :item_category
+belongs_to :item_sales_status
+belongs_to :item_shipping_fee_status
+belongs_to :item_prefecture
+belongs_to :item_scheduled_delivery
 has_one :orders
 
 
