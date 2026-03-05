@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
     @item = Item.includes(:user).order(created_at: :desc)
   end
 
+  def show
+    @item = Item.find(params[:id])
+    @user = @item.user
+  end
+
   def new
     @item = Item.new
   end
@@ -17,6 +22,8 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+
 
   private
 
