@@ -9,12 +9,14 @@ class OrderAddress
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
     validates :user_id
     validates :item_id
-    validates :token
+    validates :token, presence: true
   end
   validates :prefecture, numericality: {other_than: 1}
 
   def save
-    order = Order.create(item_id: item_id, user_id: user_id)
-    Address.create(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, building: building, phone_number: phone_number, order_id: order.id)
+    ActiveRecord::Base.transaction do
+      order = Order.create!(item_id: item_id, user_id: user_id)
+      Address.create!(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, building: building, phone_number: phone_number, order_id: order.id)
+    end
   end
 end
