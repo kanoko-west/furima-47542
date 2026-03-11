@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_10_051537) do
     t.bigint "order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "phone_number"
+    t.string "phone_number", null: false
     t.index ["order_id"], name: "index_addresses_on_order_id"
   end
 

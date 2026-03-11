@@ -69,6 +69,23 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
+      it '郵便番号が空では保存できない' do
+      @order_address = build(:order_address, postal_code: nil)
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
+      end
+
+      it '市区町村が空では保存できない' do
+        @order_address = build(:order_address, city: nil)
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("City can't be blank")
+      end
+
+      it '電話番号が空では保存できない' do
+        @order_address = build(:order_address, phone_number: nil)
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+      end
     end
   end
 end
