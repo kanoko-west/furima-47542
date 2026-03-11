@@ -37,7 +37,7 @@ belongs_to :item_sales_status
 belongs_to :item_shipping_fee_status
 belongs_to :item_prefecture
 belongs_to :item_scheduled_delivery
-has_one :orders
+has_one :order
 
 
 ## orders テーブル
@@ -49,10 +49,10 @@ has_one :orders
 
 belongs_to :user
 belongs_to :item
-has_one :shipping_address
+has_one :address
 
 
-## shipping_address テーブル
+## address テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -60,8 +60,8 @@ has_one :shipping_address
 | postal_code   | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
-| address       | string     | null: false                    |
-| building_name | string     |                                |
+| house_number  | string     | null: false                    |
+| building      | string     |                                |
 | phone_number  | string     | null: false                    |
 
 
