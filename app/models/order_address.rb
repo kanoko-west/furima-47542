@@ -9,11 +9,13 @@ class OrderAddress
     validates :user_id
     validates :item_id
     validates :token
-   end
-  validates :prefecture, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :phone_number, presence: true
+    validates :phone_number
+  end
   validates :phone_number, numericality: { only_integer: true, message: 'is invalid. Input only number' }
-  validates :phone_number, length: { minimum: 10, message: 'is too short' }
+  validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is too short' }
+  validates :prefecture, numericality: { other_than: 1 , message: "can't be blank"}
+
+
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
     Address.create(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, building: building,
