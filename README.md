@@ -37,7 +37,7 @@ belongs_to :item_sales_status
 belongs_to :item_shipping_fee_status
 belongs_to :item_prefecture
 belongs_to :item_scheduled_delivery
-has_one :orders
+has_one :order
 
 
 ## orders テーブル
