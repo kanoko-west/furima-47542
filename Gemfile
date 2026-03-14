@@ -74,7 +74,6 @@ group :production do
   gem 'pg'
   gem 'unicorn', '6.1.0'
 end
-
 gem 'active_hash'
 gem 'devise'
 gem 'image_processing', '~> 1.2'
